@@ -21,7 +21,7 @@ enum tap_dance_codes {
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [0] = REVERSED_LAYOUT_split_3x5_3(
+  [0] = LAYOUT_split_3x5_3(
 
   //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
       KC_Y,   KC_C,     KC_L,     KC_M,    KC_K,    						KC_Z,   KC_F,   KC_U,   TD(DANCE_2),  KC_BSPC,
@@ -30,11 +30,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //------------------------------------------------------------------------------       ----------------------------------------------------------------------------
       KC_Q,   KC_V,  KC_W,   KC_D,  KC_J,     							KC_B,   KC_H,   TD(DANCE_3),   TD(DANCE_1),   KC_X,
   //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
-		    					MT(MOD_MEH,KC_SPACE),OSM(MOD_LSFT), KC_NO,      KC_NO, OSM(MOD_RCTL), TO(1)
+		    					OSM(MOD_RCTL), TO(1), KC_NO,      KC_NO, MT(MOD_MEH,KC_SPACE), OSM(MOD_LSFT)
   //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
   ),
 
-  [1] = REVERSED_LAYOUT_split_3x5_3(
+  [1] = LAYOUT_split_3x5_3(
   //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
     KC_ESCAPE,KC_AT    ,LSFT(KC_3)     ,TD(DANCE_31)     ,KC_PERC    ,KC_CIRC    ,KC_AMPR   ,KC_ASTR   ,KC_SCOLON   ,KC_BSPC ,
   //----------------------------------------------------------------------------       ----------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		    					TO(0) ,OSM(MOD_LSFT), KC_NO, KC_NO, KC_RALT      ,TO(2) 
   ),
 
-  [2] = REVERSED_LAYOUT_split_3x5_3(
+  [2] = LAYOUT_split_3x5_3(
   //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
    KC_ESCAPE,      KC_MEDIA_PLAY_PAUSE,KC_MEDIA_PREV_TRACK,KC_MEDIA_NEXT_TRACK,LSFT(KC_MINS),KC_MINS,   KC_7,  KC_8, KC_9,KC_TRANSPARENT,
   //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	  TO(0), KC_LGUI,KC_NO, KC_NO, KC_RALT ,TO(2)
   ),
 
-  [3] = REVERSED_LAYOUT_split_3x5_3(
+  [3] = LAYOUT_split_3x5_3(
       TD(DANCE_54),   KC_MS_WH_LEFT,  KC_MS_UP,       KC_MS_WH_RIGHT, TD(DANCE_55), LGUI(KC_LBRACKET),LCTL(LSFT(KC_TAB)),RCTL(KC_TAB),   LGUI(KC_RBRACKET),KC_TRANSPARENT, 
   //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
 	     TD(DANCE_56),   KC_MS_LEFT,     KC_MS_DOWN,     KC_MS_RIGHT,    MT(MOD_LGUI,KC_DEL),    TD(DANCE_60),   MT(MOD_RGUI,KC_DOWN), MT(MOD_RALT,KC_UP),   TD(DANCE_63),   KC_ENTER,     
