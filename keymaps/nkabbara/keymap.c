@@ -24,7 +24,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_split_3x5_3(
 
   //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
-      KC_Y,   KC_C,     KC_L,     KC_M,    KC_K,    						KC_Z,   KC_F,   KC_U,   TD(DANCE_2),  KC_BSPC,
+      KC_Y,   KC_C,     KC_L,     KC_M,    KC_K,    						KC_Z,   KC_F,   KC_U,   KC_COMM,  KC_QUOTE,
   //------------------------------------------------------------------------------       ----------------------------------------------------------------------------
       KC_I,    KC_S,    MT(MOD_LALT,KC_R),    MT(MOD_LGUI,KC_T),    KC_G,  	KC_P,   MT(MOD_RGUI,KC_N),   MT(MOD_RALT,KC_E),  KC_A,  KC_O,
   //------------------------------------------------------------------------------       ----------------------------------------------------------------------------
@@ -69,7 +69,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 
+///// COMBO BEGIN
 
+//make combos only fire if held for a TAPPING_TERM amount of time
+#define COMBO_MUST_TAP_PER_COMBO  true 
+enum combos {
+  IS_ESC,
+  DANCE_2_QUOTE_BKSP,
+};
+
+const uint16_t PROGMEM is_combo[] = {KC_I, KC_S, COMBO_END};
+const uint16_t PROGMEM dance_2_quote_combo[] = {KC_COMM, KC_QUOTE, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+  [IS_ESC] = COMBO(is_combo, KC_ESCAPE),
+  [DANCE_2_QUOTE_BKSP] = COMBO(dance_2_quote_combo, KC_BSPC),
+};
+
+//// COMBO END
 
 extern bool g_suspend_state;
 #define GET_TAP_KC(dual_role_key) dual_role_key & 0xFF
@@ -122,6 +139,8 @@ uint8_t dance_2_dance_step(qk_tap_dance_state_t *state) {
 	}
 	return MORE_TAPS;
 }
+
+
 void dance_2_finished(qk_tap_dance_state_t *state, void *user_data) {
 	dance_state.step = dance_2_dance_step(state);
 	switch (dance_state.step) {
