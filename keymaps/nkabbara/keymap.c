@@ -16,6 +16,7 @@ enum tap_dance_codes {
   DANCE_59,
   DANCE_60,
   DANCE_63,
+  DANCE_64,
   BKSL_HME,
   PIPE_END,
 };
@@ -24,9 +25,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_split_3x5_3(
 
   //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
-      KC_Y,   KC_C,     KC_L,     KC_M,    KC_K,    						KC_Z,   KC_F,   KC_U,   KC_COMM,  KC_QUOTE,
+      KC_Y,   KC_C,     KC_L,     KC_M,    KC_K,    						KC_Z,   KC_F,   KC_U,   TD(DANCE_2),  KC_QUOTE,
   //------------------------------------------------------------------------------       ----------------------------------------------------------------------------
-      KC_I,    KC_S,    MT(MOD_LALT,KC_R),    MT(MOD_LGUI,KC_T),    KC_G,  	KC_P,   MT(MOD_RGUI,KC_N),   MT(MOD_RALT,KC_E),  KC_A,  KC_O,
+      KC_I,    KC_S,    MT(MOD_LALT,KC_R),    MT(MOD_LGUI,KC_T),    KC_G,  	KC_P,   MT(MOD_RGUI,KC_N),   MT(MOD_RALT,KC_E),  TD(DANCE_64),  KC_O,
   //------------------------------------------------------------------------------       ----------------------------------------------------------------------------
       KC_Q,   KC_V,  KC_W,   KC_D,  KC_J,     							KC_B,   KC_H,   TD(DANCE_3),   TD(DANCE_1),   KC_X,
   //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
@@ -76,14 +77,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 enum combos {
   IS_ESC,
   DANCE_2_QUOTE_BKSP,
+  EA_ENTER,
 };
 
-const uint16_t PROGMEM is_combo[] = {KC_I, KC_S, COMBO_END};
-const uint16_t PROGMEM dance_2_quote_combo[] = {KC_COMM, KC_QUOTE, COMBO_END};
+const uint16_t PROGMEM sr_combo[] = {KC_S, MT(MOD_LALT,KC_R), COMBO_END};
+const uint16_t PROGMEM dance_2_quote_combo[] = {KC_U, TD(DANCE_2), COMBO_END};
+const uint16_t PROGMEM ea_enter_combo[] = {MT(MOD_RALT,KC_E), TD(DANCE_64), COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
-  [IS_ESC] = COMBO(is_combo, KC_ESCAPE),
+  [IS_ESC] = COMBO(sr_combo, KC_ESCAPE),
   [DANCE_2_QUOTE_BKSP] = COMBO(dance_2_quote_combo, KC_BSPC),
+  [EA_ENTER] = COMBO(ea_enter_combo, KC_ENTER),
 };
 
 //// COMBO END
@@ -931,6 +935,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
         [DANCE_59] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_59, dance_59_finished, dance_59_reset),
         [DANCE_60] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_60, dance_60_finished, dance_60_reset),
         [DANCE_63] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_63, dance_63_finished, dance_63_reset),
+        [DANCE_64] = ACTION_TAP_DANCE_DOUBLE(KC_A, KC_COLON),
         [BKSL_HME] = ACTION_TAP_DANCE_FN_ADVANCED(on_bksl_hme, bksl_hme_finished, bksl_hme_reset),
         [PIPE_END] = ACTION_TAP_DANCE_FN_ADVANCED(on_pipe_end, pipe_end_finished, pipe_end_reset),
 };
